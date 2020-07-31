@@ -1,0 +1,12 @@
+*.aux
+*.out
+*.log
+*.dvi
+*.csv
+*.scsv
+*.tsv
+*.sh
+*db-sample
+*.*~
+#*.*#
+*.txt
