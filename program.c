@@ -11,7 +11,7 @@ double f(double x)
   double y;
 
   x = x * x * x;
-  y = 1.0 / x;
+  y = 1 / x;
 
   return y;
 }
@@ -23,31 +23,70 @@ void trape(int part)
   double x;
   double y_l;
   double y_r;
-  double S[20];
-  double ans = 0;
+  double S = 0;
 
-  h = fabs((b - a)/part); /*小区間の幅を計算*/
+  h = fabs((b - a) / part);
   x = a;
 
   for(i = 0; i < part; i++)
     {
       y_l = f(x);
       y_r = f(x + h);
-      S[i] = ((y_l + y_r) *h) / 2.0;
+      S = S + ((y_l + y_r) * h) / 2;
       x = x + h;
     }
 
-  for(i = 0; i < part; i++) ans = ans + S[i];
-
-  printf("\nTrapezoidal Answer:%f\n", ans);
-  printf("The difference    :%f\n", fabs(ans - t_value));
+  printf("\nTrapezoidal Answer:%f\n", S);
+  printf("The difference    :%f\n", fabs(S - t_value));
 }
 
-/*void simp(int part)
+void simp(int part)
 {
   int i;
   double h;
-  }*/
+  double x;
+  double y_l;
+  double y_c;
+  double y_r;
+  double S = 0;
+
+  h = fabs((b - a) / part);
+  x = a;
+
+  for(i = 0; x < b; i++)
+    {
+      y_l = f(x);
+      y_c = f(x + h);
+      y_r = f(x + 2 * h);
+      S = S + h * (y_l + 4 * y_c + y_r) / 3;
+      x = x + 2 * h;
+    }
+
+  printf("\nSimpson's Answer:%f\n", S);
+  printf("The difference  :%f\n", fabs(S - t_value));
+  }
+
+void simp2(int part)
+{
+  float k;
+  double h;
+  double s;
+  double I;
+  double x;
+
+  h = fabs((b - a) / part);
+  s = f(a) + f(b);
+
+  for(k = 1; k <= part / 2.0 - 1; k++)
+    {
+      x = a + h * (2 * k);
+      s = s + 4 * f(x - h) + 2 * f(x); /*中央と右しか足してない*/
+    }
+  I = h * (s + 4 * f(b - h)) / 3;
+
+  printf("\nSimpson's Answer:%f\n", I);
+  printf("The difference  :%f\n", fabs(I - t_value));
+}
 
 int main(void)
 {
@@ -61,7 +100,8 @@ int main(void)
   scanf("%d", &part);
 
   if(mode == 1) trape(part);
-  if(mode == 2) /*simp(part)*/;
+  if(mode == 2) simp(part);
+  if(mode == 3) simp2(part);
 
   return 0;
 }
