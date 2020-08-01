@@ -35,8 +35,8 @@ void trape(int part)
       S = S + ((y_l + y_r) * h) / 2;
       x = x + h;
     }
-
-  printf("\nTrapezoidal Answer:%f\n", S);
+  fprintf(stderr, "\n");
+  printf("Trapezoidal Answer:%f\n", S);
   printf("The difference    :%f\n", fabs(S - t_value));
 }
 
@@ -61,8 +61,8 @@ void simp(int part)
       S = S + h * (y_l + 4 * y_c + y_r) / 3;
       x = x + 2 * h;
     }
-
-  printf("\nSimpson's Answer:%f\n", S);
+  fprintf(stderr, "\n");
+  printf("Simpson's Answer:%f\n", S);
   printf("The difference  :%f\n", fabs(S - t_value));
   }
 
@@ -83,8 +83,8 @@ void simp2(int part)
       s = s + 4 * f(x - h) + 2 * f(x); /*中央と右しか足してない*/
     }
   I = h * (s + 4 * f(b - h)) / 3;
-
-  printf("\nSimpson's Answer:%f\n", I);
+  fprintf(stderr, "\n");
+  printf("Simpson's Answer:%f\n", I);
   printf("The difference  :%f\n", fabs(I - t_value));
 }
 
