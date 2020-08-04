@@ -62,30 +62,8 @@ void simp(int part)
       x = x + 2 * h;
     }
   fprintf(stderr, "\n");
-  printf("Simpson's Answer:%f\n", S);
-  printf("The difference  :%f\n", fabs(S - t_value));
-  }
-
-void simp2(int part)
-{
-  float k;
-  double h;
-  double s;
-  double I;
-  double x;
-
-  h = fabs((b - a) / part);
-  s = f(a) + f(b);
-
-  for(k = 1; k <= part / 2.0 - 1; k++)
-    {
-      x = a + h * (2 * k);
-      s = s + 4 * f(x - h) + 2 * f(x); /*中央と右しか足してない*/
-    }
-  I = h * (s + 4 * f(b - h)) / 3;
-  fprintf(stderr, "\n");
-  printf("Simpson's Answer:%f\n", I);
-  printf("The difference  :%f\n", fabs(I - t_value));
+  printf("Simpson's Answer:  %f\n", S);
+  printf("The difference  :  %f\n", fabs(S - t_value));
 }
 
 int main(void)
@@ -101,7 +79,6 @@ int main(void)
 
   if(mode == 1) trape(part);
   if(mode == 2) simp(part);
-  if(mode == 3) simp2(part);
 
   return 0;
 }
